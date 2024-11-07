@@ -1,0 +1,172 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<br><br><br><br>
+
+<h1 class="text-capitalize text-center mx-10 bg-dark text-white">ENREGISTRER UNE NOUVELLE FACTURE</h1>
+
+<form  method="post">
+ {%csrf_token%}
+
+ <div class="row">
+    <div class="form-group col-md-12">
+        <label for="cliente">Client</label>
+        <select name="client" class="form-control" id="cliente">
+            <option>Choisisez un client</option>
+            {% for client in clients %}
+            <option value="{{client.id}}"> {{forloop.counter}} {{client.nom}} </option>
+            {%endfor%}
+        </select>
+    </div>
+ </div>
+
+
+ <div class="row">
+    <div class="form-group col-md-12">
+        <label for="type_f">Type Facture</label>
+        <select name="type_facture" class="form-control" id="type_f">
+            <option>Choisisez le type de facture</option>
+            <option value="R">Réçue</option>
+            <option value="P">Proformat</option>
+            <option value="F">Facture</option>
+        </select>
+    </div>
+ </div>
+
+ <div id ="wrapper">
+        <div class="row">
+            <div class="form-group col-md-4">
+
+                <label for="article-1">#1 Nom Article</label>
+                <input type="text" required name="article"  class="form-control" id="article-1">
+            </div>
+            
+
+
+
+            <div class="form-group col-md-2">
+                <label for="qte-1">Quantité</label>
+                <input type="number" required name="qte" min="1" step="0.1"  class="form-control" id="qte-1">
+            </div>
+
+            <div class="form-group col-md-3">
+                <label for="unit-1">Prix unitaire</label>
+                <input type="number" required name="unit-a" min="1" step="0.1" onchange="handleChangeSingleArticle(this.id)" class="form-control" id="unit-1">
+            </div>
+
+            <div class="form-group col-md-3">
+                <label for="total-a-1">Prix Total</label>
+                <input type="number" required name="total-a" min="1" readonly step="0.1"  class="form-control" id="total-a-1">
+            </div>
+
+        </div>
+
+
+   </div>
+
+   <div class="form-row">
+    <div class="form-group col-md-12">
+        <label for="total">Total</label>
+        <input type="number" value="0" name="total" id="total" step="0.1" readonly class="form-control">
+
+
+    </div>
+   </div>
+
+   <div class="row">
+    <div class="form-group col-md-12">
+        <label for="commentaire">Commentaire</label>
+        <textarea class="form-control" name="commentaire" id="commentaire" cols="30" rows="1"></textarea>
+    </div>
+
+
+   </div>
+
+   <button type="submit" class=" btn btn-primary">Sauvegarder</button>
+   <br><br>
+   <div class="row">
+    <button type="button" id="ajl" class="btn btn-outline-warning w-50 col-md-6">Ajouter un Article</button>
+   <button type="button" id="sl" class="btn btn-outline-danger w-50 col-md-6">Supprimer un Article</button>
+   </div>
+
+   <br><br><br><br>
+ 
+    
+</form>
+
+<script type="text/javascript">
+
+    // clique pour ajouter une ligne en dernierre position dans la facture
+
+    $(document).on('click','#ajl',function(){
+        var number =$('#wrapper').children().length + 1;
+
+        let new_ar = `
+        <div class="row">
+            <div class="form-group col-md-4">
+
+                <label for="article-${number}">#${number} Nom Article</label>
+                <input type="text" required name="article"  class="form-control" id="article-${number}">
+            </div>
+            
+
+
+
+            <div class="form-group col-md-2">
+                <label for="qte-${number}">Quantité</label>
+                <input type="number" required name="qte" min="1" step="0.1"  class="form-control" id="qte-${number}">
+            </div>
+
+            <div class="form-group col-md-3">
+                <label for="unit-${number}">Prix unitaire</label>
+                <input type="number" required name="unit-a" min="1" step="0.1" onchange="handleChangeSingleArticle(this.id)" class="form-control" id="unit-${number}">
+            </div>
+
+            <div class="form-group col-md-3">
+                <label for="total-a-${number}">Prix Total</label>
+                <input type="number" required name="total-a" min="1" readonly step="0.1"  class="form-control" id="total-a-${number}">
+            </div>
+
+        </div>
+
+        
+        `
+
+
+        $("#wrapper:last").append(new_ar);
+    })
+
+
+    // clique pour supprimer une la derniere ligne dans la facture
+
+    $(document).on('click','#sl',function(){
+        $('#wrapper').children().last().remove();
+    })
+
+    // calculs des totaux
+    function handleChangeSingleArticle(id){
+        let articleId = id.split('-')[1];
+        let idqte = `#qte-${articleId}`;
+        let idunit =`#unit-${articleId}`;
+        let totael =`#total-a-${articleId}`;
+
+        let totaligne = parseFloat($(idqte).val()) * parseFloat($(idunit).val());
+        $(totael).val(totaligne);
+
+        $("#total").val(parseFloat($('#total').val()) + totaligne);
+
+
+
+
+        
+    }
+
+
+
+</script>
+    
+
+    
+{% endblock content %}
+

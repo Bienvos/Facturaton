@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    
+    <title>Facture</title>
+    <script src="{% static 'facture/js/jquery.js'%}"></script>
+    <link rel="stylesheet" href="{% static 'facture/css/bootstrap.css'%}">
+    <link rel="stylesheet" href="{% static 'facture/css/style.css'%}">
+</head>
+
+<body>
+
+
+    <!-- header -->
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/">SYSTEME FACTURATION</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+  
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+  
+            <div class="nav-item dropdown">
+              <a class="nav-link text-dark dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Langues
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                <a class="dropdown-item" href="#">Anglais</a>
+                <a class="dropdown-item" href="#">Français</a>
+                
+              </div>
+            </div>
+  
+          </ul>
+  
+        </div>
+  
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+  
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Plus d'options
+              </a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="#">Ajouter Client</a>
+                <a class="dropdown-item" href="#">Ajouter Administrateur</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Statistiques</a>
+              </div>
+            </li>
+  
+          </ul>
+  
+        </div>
+      </nav>
+    </header>
+    <!-- header-->
+
+    <!-- load the messages in the settings file-->
+
+    <div class="container">
+       <div class="wrapper">
+        <br>
+
+        
+        {% for message in messages %}
+
+        <div class="alert {{message.tags}} alert-dismissible" role ="alert">
+
+          <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          {{message|safe}}
+
+        </div>
+          
+        {% endfor %}
+          
+
+       </div>
+    </div>
+
+
+
+
+
+    <!--  messages in settings file-->
+
+
+    
+    <div class="contenair">
+        {% block content %}
+        
+    {% endblock content %}
+        
+    </div>
+
+    <!-- footer-->
+    <br>
+
+    <footer class="bg-light text-center text-dark" style="background-color: rgba(0, 0, 0, 0.4);">
+
+      <div class="text text-center p-3">
+        Systeme Facturation © 2024 copyright
+      </div>
+
+    </footer>
+    <!-- footer -->
+
+
+     
+    <script src="{% static 'facture/js/bootstrap.js'%}"></script>
+    <script src="{% static 'facture/js/popper.js'%}"></script>
+    <script src="{% static 'facture/js/jquery.js'%}"></script>
+</body>
+</html>

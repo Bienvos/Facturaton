@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<br><br><br><br> 
+
+<h1 class="text-capitalize text-center mx-10 bg-dark text-white">ENREGISTRER UN NOUVEAU CLIENT</h1>
+
+<form action="" method="post">
+    {% csrf_token %}
+
+    <div class="row">
+        <div class="form-group col-md-6" >
+            <label for="nom">Nom</label>
+            <input type="text" name="nom" required id="nom" class="form-control" placeholder="Nom et Prénom du client">
+        </div>
+        <div class="form-group col-md-4" >
+            <label for="Email">Email</label>
+            <input type="email" name="Email" required id="Email" class="form-control" placeholder="Email du Client">
+        </div>
+        <div class="form-group col-md-2" >
+            <label for="Phone">Téléphone</label>
+            <input type="number" name="Phone" required id="Phone" class="form-control" placeholder=" Numero Telephone">
+        </div>
+        
+    </div>
+
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label for="sexe">sexe</label>
+            <select name="sexe" class="form-control" required id="sexe">
+                <option>Choisisez le sexe</option>
+                <option value="M">Masculin</option>
+                <option value="F">Feminin</option>
+            </select>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label for="Age">Age</label>
+            <select name="Age" class="form-control" required id="Age">
+                <option>Tranche Age</option>
+                <option value="0-15">0-15</option>
+                <option value="15-30">15-30</option>
+                <option value="30 et plus ...">30 et plus ...</option>
+            </select>
+        </div>
+
+
+    </div>
+
+    <div class="row">
+        <div class="form-group">
+            <label for="Adresse">Adresse</label>
+            <input type="text" name="Adresse" required id="Adresse" class="form-control" placeholder="Adresse du client...">
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group ">
+            <label for="quartier">quartier</label>
+            <input type="text" name="quartier" required id="quartier" class="form-control" placeholder=" quartier du client">
+
+        </div>
+
+        
+    </div>
+
+    <br><br>
+
+
+    <div  class="col-md-6"> <button type="submit" class="btn btn-primary">Sauvegarder</button></div>
+</form>
+
+    
+{% endblock content %}
+    
